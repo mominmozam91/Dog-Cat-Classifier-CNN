@@ -1,0 +1,125 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat vs Dog Classifier</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #f06, #800080); /* Instagram-style pink and purple gradient */
+        }
+
+        .container {
+            background: #fff; /* White background for the container */
+            padding: 40px;
+            border-radius: 20px; /* Rounded corners for a modern look */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            color: #333; /* Dark text for good contrast on white background */
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 15px;
+            background: #000; /* Black background for the file input */
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            color: white; /* White text for file name */
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: #000; /* Black button */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background: #333; /* Darker shade for hover */
+        }
+
+        button {
+            margin-top: 15px;
+            background: #444;
+            color: white;
+            padding: 12px 28px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff7f50;
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff7f50;
+        }
+
+        .input-answer {
+            margin-top: 15px;
+            padding: 12px;
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 3px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐱🐶 Cat vs Dog Prediction</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">Prediction: {{ prediction }}</div>
+            <img src="{{ image_url }}" alt="Uploaded Image">
+        {% endif %}
+        
+
+    </div>
+</body>
+</html>
